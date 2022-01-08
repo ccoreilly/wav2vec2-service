@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wav2vec2-catala
+  labels:
+    app: wav2vec2-catala
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: wav2vec2-catala
+  template:
+    metadata:
+      labels:
+        app: wav2vec2-catala
+    spec:
+      imagePullSecrets:
+      - name: github-registry
+      containers:
+        - name: wav2vec2-catala
+          image: ghcr.io/ccoreilly/wav2vec2-catala:0.1.0
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+            periodSeconds: 30
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+              name: http
