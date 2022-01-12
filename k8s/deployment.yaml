@@ -5,7 +5,7 @@ metadata:
   labels:
     app: wav2vec2-catala
 spec:
-  replicas: 1
+  replicas: 2
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -22,22 +22,8 @@ spec:
       - name: github-registry
       containers:
         - name: wav2vec2-catala
-          image: ghcr.io/ccoreilly/wav2vec2-catala:0.1.0
+          image: ghcr.io/ccoreilly/wav2vec2-catala-onnx:0.1.0
           imagePullPolicy: IfNotPresent
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 8000
-            initialDelaySeconds: 30
-            timeoutSeconds: 1
-            periodSeconds: 30
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 8000
-            initialDelaySeconds: 30
-            timeoutSeconds: 1
-            periodSeconds: 30
           ports:
             - containerPort: 8000
               protocol: TCP
