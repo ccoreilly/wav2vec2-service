@@ -22,7 +22,7 @@ spec:
       - name: github-registry
       containers:
         - name: wav2vec2-catala
-          image: ghcr.io/ccoreilly/wav2vec2-catala-onnx:0.1.0
+          image: ghcr.io/ccoreilly/wav2vec2-catala-onnx:0.1.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000

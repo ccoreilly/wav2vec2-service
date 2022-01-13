@@ -29,7 +29,9 @@ async def health_check():
 @app.post('/recognize')
 async def recognize(file: UploadFile = File(..., media_type="audio/wav")):
     if file:
-      return predict(file.file)
+      return {
+        "text": predict(file.file)
+      }
     else:
         raise HTTPException(status_code=400, detail="Audio bytes expected")
 
