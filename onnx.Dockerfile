@@ -25,7 +25,7 @@ RUN pip install --no-cache-dir -r requirements.txt && \
   pip install https://download.pytorch.org/whl/cpu/torch-1.10.1%2Bcpu-cp39-cp39-linux_x86_64.whl && \
   python -c "from os import getenv; from transformers import Wav2Vec2Processor; Wav2Vec2Processor.from_pretrained(getenv('model'));"
 
-COPY --chown=wav2vec2:wav2vec2 onnx.py .
+COPY --chown=wav2vec2:wav2vec2 onnx-inference.py onnx.py
 COPY --chown=wav2vec2:wav2vec2 wav2vec2.onnx .
 
 CMD ["uvicorn", "onnx:app", "--host", "0.0.0.0", "--port", "8000"]

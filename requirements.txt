@@ -13,6 +13,7 @@ huggingface-hub==0.4.0
 idna==3.3
 joblib==1.1.0
 numpy==1.22.0
+onnx==1.10.2
 onnxruntime==1.10.0
 packaging==21.3
 protobuf==3.19.3

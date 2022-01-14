@@ -24,8 +24,6 @@ def convert_to_onnx(model_id_or_path, onnx_model_name):
 def quantize_onnx_model(onnx_model_path, quantized_model_path):
     print("Starting quantization...")
     from onnxruntime.quantization import quantize_dynamic, QuantType
-    import onnx
-    onnx_opt_model = onnx.load(onnx_model_path)
     quantize_dynamic(onnx_model_path,
                      quantized_model_path,
                      weight_type=QuantType.QUInt8)
